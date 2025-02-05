@@ -4,7 +4,7 @@ import React from 'react'
 const shedule = () => {
   return (
     <View>
-      <Text>This is shedule file</Text>
+      <Text>This issfesfsveee shedule file</Text>
     </View>
   )
 }
