@@ -27,7 +27,7 @@ const CouchhData = [
 export default function Index() {
   return (
     <SafeAreaView className=" h-full">
-      <ScrollView className="px-2" showsVerticalScrollIndicator={false} contentContainerClassName='pb-32'>
+      <ScrollView className="px-2" showsVerticalScrollIndicator={false} contentContainerClassName='pb-2'>
         <View className="flex flex-row items-center py-2 justify-between bg-white">
           <Image source={require("../../../assets/images/logo.webp")} className="size-16 rounded-full flex " ></Image>
           <View>
