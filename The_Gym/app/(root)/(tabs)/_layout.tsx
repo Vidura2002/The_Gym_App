@@ -20,7 +20,7 @@ const TabLayout = () => {
       })}
       
     >
-        <Tabs.Screen
+    <Tabs.Screen
     name="index"
     options={({route})=>({
         tabBarLabel: "Home",
@@ -35,7 +35,9 @@ const TabLayout = () => {
     />
 
     <Tabs.Screen
-    name="shedule"
+
+    name="schedule"
+
     options={{
         tabBarLabel: "Schedule",
         headerShown: false,
@@ -44,7 +46,7 @@ const TabLayout = () => {
         )
     }}
     />
-
+    
     <Tabs.Screen
     name="profile"
     options={{
@@ -53,6 +55,13 @@ const TabLayout = () => {
         tabBarIcon:({color,size,focused})=> (
             <FontAwesome5 name="user-circle" size={24} color="black" />
         )
+    }}
+    />
+    <Tabs.Screen
+    name="login"
+    options={{
+        tabBarLabel: "Login",
+        headerShown: false,
     }}
     />
 

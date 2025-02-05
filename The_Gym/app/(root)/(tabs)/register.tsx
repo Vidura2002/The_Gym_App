@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const shedule = () => {
+const register = () => {
   return (
     <View>
-      <Text>This is shedule file</Text>
+      <Text>This is register Page edit this</Text>
     </View>
   )
 }
 
-export default shedule
+export default register
