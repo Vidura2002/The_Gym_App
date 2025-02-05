@@ -16,7 +16,7 @@ const TabLayout = () => {
         },
       }}
     >
-        <Tabs.Screen
+    <Tabs.Screen
     name="index"
     options={{
         tabBarLabel: "Home",
@@ -25,17 +25,24 @@ const TabLayout = () => {
     />
 
     <Tabs.Screen
-    name="schedule"
+    name="register"
     options={{
-        tabBarLabel: "Schedule",
+        tabBarLabel: "Register",
         headerShown: false,
     }}
     />
-
+    
     <Tabs.Screen
     name="profile"
     options={{
         tabBarLabel: "Profile",
+        headerShown: false,
+    }}
+    />
+    <Tabs.Screen
+    name="login"
+    options={{
+        tabBarLabel: "Login",
         headerShown: false,
     }}
     />
