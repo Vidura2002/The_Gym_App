@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
-import shedule from "./shedule";
+import shedule from "./register";
 
 export default function Index() {
   return (
