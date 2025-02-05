@@ -1,14 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const register = () => {
+const info = () => {
   return (
     <View>
-      <Text>This is register Page edit this</Text>
+      <Text>this is info page</Text>
     </View>
   )
 }
 
-
-export default register
-
+export default info
