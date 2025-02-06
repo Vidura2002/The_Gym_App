@@ -20,6 +20,14 @@ const option =[
     {name:"Bench press",set1:10,set2:10,set3:8},
     {name:"Bench press",set1:10,set2:10,set3:8},
     {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
 ]
 
 const Schedule = () => {
@@ -69,17 +77,23 @@ const Schedule = () => {
                     </TouchableOpacity>
                 ))}
             </View>
-            <View>
+            <TouchableOpacity>
                 <AntDesign name="arrowsalt" size={24} color="black" />
-            </View> 
+            </TouchableOpacity> 
         </View>
 
         <View>
             {option.map((item,index)=>(
-                <View className='flex flex-row px-1 gap-4 justify-between border-b py-2'>
-                    <Text className='text-xl text-blue-700 font-medium'>{item.name}</Text>
-                    <Text className='text-xl text-blue-700 font-medium'>{item.set1} | {item.set2} | {item.set3}</Text>
-                    <Octicons name="video" size={24} color="black" />
+                <View className='flex flex-row px-1 gap-4 justify-between pr-4 border-b py-2'>
+                    <View className='flex flex-row space-between gap-8'>
+                        <Text className='text-xl text-blue-700 font-medium'>{item.name}</Text>
+                        <Text className='text-xl text-blue-700 font-medium'>{item.set1} | {item.set2} | {item.set3}</Text>
+                    </View>
+                    
+                    <TouchableOpacity>
+                        <Octicons name="video" size={24} color="red" />
+                    </TouchableOpacity>
+                   
                 </View>
             ))}
         </View>
