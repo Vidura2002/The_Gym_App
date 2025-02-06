@@ -1,20 +1,21 @@
-import { View, Text ,Image} from 'react-native'
+import { View, Text ,Image, TouchableOpacity} from 'react-native'
 import React from 'react'
-import { Feather } from '@expo/vector-icons'
 
 const Currentmembers = ({name,time}:{name:String,time:String}) => {
   return (
-    <View className='flex flex-row justify-between px-1 items-center gap-4'>
-      <View className='flex flex-row items-center'>
-        <Image className='size-6' source={require("../../assets/icons/person.png") }></Image>
-        <Text className='text-sm'>{name}</Text>
-      </View>
+    <TouchableOpacity>
+        <View className='flex flex-row px-1 justify-between items-center   gap-2 border p-1 mt-1 rounded-md'>
+            <View className='flex flex-row gap-2 items-center'>
+                <Image className='size-12 rounded-full' source={require("../../assets/images/member.jpg") }></Image>
+                <Text className='text-md '>{name}</Text>
+            </View>
 
-      <View className='flex flex-row gap-2'>
-        <Text className='text-sm'>{time}</Text>
-        <Feather name="more-vertical" size={15} color="black" />
-      </View>
-    </View>
+            <View className='flex'>
+                <Text className='text-md mr-2 '>{time}</Text>
+            </View>
+        </View>
+    </TouchableOpacity>
+    
   )
 }
 
