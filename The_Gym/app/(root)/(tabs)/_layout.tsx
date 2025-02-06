@@ -54,7 +54,7 @@ const TabLayout = () => {
         headerShown: false,
         tabBarIcon:({color,size,focused})=> (
             <FontAwesome5 name="user-circle" size={24} color="black" />
-        )
+        ),
     }}
     />
     <Tabs.Screen
