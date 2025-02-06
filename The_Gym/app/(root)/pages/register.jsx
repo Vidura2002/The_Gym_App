@@ -1,4 +1,5 @@
 import React from 'react';
+import { router } from 'expo-router';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Platform, ImageBackground} from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -7,12 +8,12 @@ const Register = () => {
   // Placeholder for the signIn function to navigate to the login page
   const signIn = () => {
     // Add your sign-in navigation logic here
-    console.log("Navigate to Login");
+    router.push('../(tabs)/login');
   };
 
   return (
     <ImageBackground
-      source={require('../../assets/images/register.jpg')}
+      source={require('../../../assets/images/register.jpg')}
       style={styles.background}
       resizeMode="cover"
     >

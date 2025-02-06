@@ -17,7 +17,7 @@ const login = () => {
   };
 
   const signIn = () => {
-    router.push("../../Screen/register");
+    router.push('../pages/register');
   };
 
   return (
