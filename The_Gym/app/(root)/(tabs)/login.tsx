@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import for icons
@@ -13,6 +14,10 @@ const login = () => {
     } else {
       Alert.alert('Success', 'Logged in successfully');
     }
+  };
+
+  const signIn = () => {
+    router.push("../../Screen/register");
   };
 
   return (
@@ -36,6 +41,7 @@ const login = () => {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          placeholderTextColor="#fff" // Set placeholder text color here
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -44,6 +50,7 @@ const login = () => {
             value={password}
             onChangeText={setPassword}
             secureTextEntry={secureText}
+            placeholderTextColor="#fff" // Set placeholder text color here
           />
           <TouchableOpacity onPress={() => setSecureText(!secureText)}>
             <Icon name={secureText ? 'eye-slash' : 'eye'} size={20} color="#000" />
@@ -68,7 +75,7 @@ const login = () => {
         </View>
         <View style={styles.signupContainer}>
           <Text style={styles.signupText}>Don't have an account?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={signIn}>
             <Text style={styles.signupLink}> Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -82,14 +89,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{ translateY: -30 }],
+    //transform: [{ translateY: -30 }],
   },
   container: {
     //backgroundColor: 'rgba(248, 252, 254, 0.5)',
     padding: 20,
-    borderRadius: 15,
+    borderRadius: 25,
     width: '90%',
     transform: [{ translateY: 90 }],
+    paddingBottom: 0,
   },
   headerContainer: {
     //backgroundColor: 'rgba(22, 155, 221, 0.5)',
@@ -98,15 +106,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: 10,
-    paddingTop: 20,
+    paddingTop: 0,
     position: 'absolute',
     top: 0,
     left: 0,
     transform: [{ translateY: 80 }],
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
     //marginLeft: 40,
   },
   headerText: {
@@ -115,31 +124,33 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     flex: 1,
-    marginLeft: -30,
+    marginLeft: -39,
   },
   input: {
     width: '100%',
     height: 50,
-    borderColor: '#ccc',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Background color to make text visible
+    color: '#fff', // Text color
   },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: '#ccc',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Same background for the password input
     paddingHorizontal: 15,
     marginBottom: 15,
   },
   passwordInput: {
     flex: 1,
     height: 50,
+    color: '#fff', // Text color
   },
   button: {
     backgroundColor: '#4E4FEB',
@@ -157,7 +168,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'rgba(22, 155, 221, 0.5)',
     alignItems: 'center',
     marginTop: 40,
-    transform: [{ translateY: 40 }],
+    //transform: [{ translateY: 40 }],
   },
   socialText: {
     color: '#fff',
@@ -169,13 +180,14 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     marginHorizontal: 10,
+    color: '#fff',
   },
   signupContainer: {
     //backgroundColor: 'rgba(22, 155, 221, 0.5)',
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 20,
-    transform: [{ translateY: 40 }],
+    //transform: [{ translateY: 40 }],
   },
   signupText: {
     color: '#fff',
