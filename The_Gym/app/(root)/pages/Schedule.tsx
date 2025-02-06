@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TouchableOpacity, ViewBase } from 'react-native'
 import React, { useState } from 'react'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Octicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 
 const workout =[
@@ -10,9 +10,16 @@ const workout =[
 ];
 
 const days =[
-    {id:1,name:"first Day",type:[{name:"Bench press",set1:10,set2:10,set3:10},{name:"Bench press",set1:10,set2:10,set3:10},{name:"Bench press",set1:10,set2:10,set3:10}]},
+    {id:1,name:"first Day"},
     {id:2,name:"second Day"},
     {id:3,name:"third Day"},
+]
+
+const option =[
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
+    {name:"Bench press",set1:10,set2:10,set3:8},
 ]
 
 const Schedule = () => {
@@ -52,7 +59,7 @@ const Schedule = () => {
             </View>
         </View>
 
-        <View className='flex flex-row justify-between mt-8 border-b'>
+        <View className='flex flex-row justify-between mt-8 border-b mb-2'>
             <View className='flex flex-row gap-2'>
                 {days.map((item,index)=>(
                     <TouchableOpacity className={`${selecteday===item.id ? "border-l border-t border-r rounded bg-gray-300 font-extrabold" : " "} p-1 `}
@@ -68,8 +75,15 @@ const Schedule = () => {
         </View>
 
         <View>
-            
+            {option.map((item,index)=>(
+                <View className='flex flex-row px-1 gap-4 justify-between border-b py-2'>
+                    <Text className='text-xl text-blue-700 font-medium'>{item.name}</Text>
+                    <Text className='text-xl text-blue-700 font-medium'>{item.set1} | {item.set2} | {item.set3}</Text>
+                    <Octicons name="video" size={24} color="black" />
+                </View>
+            ))}
         </View>
+
     </SafeAreaView>
   )
 }
