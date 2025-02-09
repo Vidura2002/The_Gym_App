@@ -6,6 +6,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { FontAwesome } from '@expo/vector-icons';
+import { FlatList } from 'react-native';
 
 const ProfileScreen = () => {
   // State to store user profile data and image
@@ -13,7 +14,14 @@ const ProfileScreen = () => {
   const [username, setUsername] = useState('User_Name');
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [menuVisible, setMenuVisible] = useState(false);
-
+  type GymHistoryItem = {
+    id: string;
+    Date: string;
+    ArrivedTime: string;
+    LeftTime: string;
+    ScheduleNumber: string;
+  };
+  
   // Sample gym visit history data
   const gymHistory = [
     { id: '1', Date: '2025-01-30', ArrivedTime: '08:00 AM', LeftTime: '09:30 AM', ScheduleNumber: '1' },
@@ -46,7 +54,27 @@ const ProfileScreen = () => {
       setProfileImage(result.assets[0].uri); // Set the selected image URI to state
     }
   };
-
+  const renderGymHistoryItem = (item: GymHistoryItem) => (
+    <View
+      key={item.id}
+      className="flex-row justify-between py-4 px-1 gap-6 bg-white border-b border-gray-800"
+    >
+      <Text className="text-black w-1/3 text-center font-semibold">{item.Date}</Text>
+      <Text className="text-black w-2/3 text-center font-medium">
+        {item.ArrivedTime} - {item.LeftTime}
+      </Text>
+      <View
+        className="absolute bg-blue-600 w-4 h-7 rounded-full justify-center items-center"
+        style={{
+          top: 10,
+          right: 10,
+        }}
+      >
+        <Text className="text-white font-bold">{item.ScheduleNumber}</Text>
+      </View>
+    </View>
+  );
+  
   // Hide menu when keyboard is hidden
   useEffect(() => {
     const hideMenu = () => {
@@ -71,7 +99,7 @@ const ProfileScreen = () => {
     <SafeAreaView className="flex-1 bg-white">
       {/* Dismiss the menu if user taps outside */}
       <TouchableWithoutFeedback onPress={() => setMenuVisible(false)}>
-        <ScrollView className="px-4" showsVerticalScrollIndicator={false}>
+  <ScrollView className="px-4" showsVerticalScrollIndicator={false}>
           {/* Header with logo, title, and menu button */}
           <View className="flex flex-row items-center py-2 justify-between">
             <Image
@@ -121,6 +149,15 @@ const ProfileScreen = () => {
               />
             </TouchableOpacity>
           </View>
+          <View className="w-full h-96 py-4 justify-center rounded-lg mt-10 bg-gray-50 shadow-md">
+  <FlatList
+    data={gymHistory}
+    keyExtractor={(item) => item.id}
+    renderItem={({ item }) => renderGymHistoryItem(item)}
+    nestedScrollEnabled
+    showsVerticalScrollIndicator={false}
+  />
+</View>
 
           {/* Workout Schedule Button */}
           <TouchableOpacity className="bg-gray-900 w-full px-10 py-7 rounded-lg w-92 h-30 mt-8 flex flex-row justify-between items-center">
@@ -133,32 +170,7 @@ const ProfileScreen = () => {
           </TouchableOpacity>
 
           {/* Gym History List */}
-          <View className="w-full py-4 justify-center rounded-lg mt-10 bg-gray-50 shadow-md">
-            {gymHistory
-              .sort((a, b) => new Date(b.Date).getTime() - new Date(a.Date).getTime()) // Sort by latest date
-              .map((item) => (
-                <View
-                  key={item.id}
-                  className="flex-row justify-between py-4 px-1 gap-6 bg-white border-b border-gray-800"
-                >
-                  <Text className="text-black w-1/3 text-center font-semibold">{item.Date}</Text>
-                  <Text className="text-black w-2/3 text-center font-medium">
-                    {item.ArrivedTime} - {item.LeftTime}
-                  </Text>
-
-                  {/* Schedule Number Indicator */}
-                  <View
-                    className="absolute top-0 right-0 bg-blue-600 w-4 h-7 rounded-full justify-center items-center"
-                    style={{
-                      top: 10,
-                      right: 10,
-                    }}
-                  >
-                    <Text className="text-white font-bold">{item.ScheduleNumber}</Text>
-                  </View>
-                </View>
-              ))}
-          </View>
+       
 
           {/* Menu - Edit Profile, Logout, Settings */}
           {menuVisible && (
