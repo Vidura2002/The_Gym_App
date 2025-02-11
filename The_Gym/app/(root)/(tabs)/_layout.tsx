@@ -76,6 +76,17 @@ const TabLayout = () => {
         }}
     />
 
+    <Tabs.Screen
+            name="inbox"
+            options={{
+                tabBarLabel:"inbox",
+                headerShown:false,
+                tabBarIcon:({color,size,focused})=> (
+                  <AntDesign name="message1" size={24} color="black" />
+                )
+            }}
+    />
+
     </Tabs>
   );
 };

@@ -26,8 +26,8 @@ const CouchhData = [
 
 export default function Index() {
   return (
-    <SafeAreaView className=" h-full">
-      <ScrollView className="px-2" showsVerticalScrollIndicator={false} contentContainerClassName='pb-2'>
+    <SafeAreaView className="">
+      <ScrollView className="px-2" showsVerticalScrollIndicator={false} contentContainerClassName='pb-4'>
         <View className="flex flex-row items-center py-2 justify-between bg-white">
           <Image source={require("../../../assets/images/logo.webp")} className="size-16 rounded-full flex " ></Image>
           <View>
@@ -37,17 +37,20 @@ export default function Index() {
         </View>
 
 
-        <View className="flex flex-row px-2 mt-6 justify-between">
-          <View className="bg-gray-600 p-5 rounded-md shadow-full">
-            <Text className="text-white text-2xl font-bold">Current members</Text>
+        <View className="flex flex-row justify-between space-x-4 gap-2">
+          <View className="flex-1 bg-gray-600 p-5 rounded-md shadow-lg">
+            <Text className="text-white text-2xl font-bold text-center">Current Members</Text>
             <Text className="text-white text-3xl font-bold text-center">37</Text>
           </View>
 
-          <View className="bg-gray-600 p-5 rounded-md shadow-full">
-            <Text className="text-white text-2xl font-bold">Sheduled</Text>
+          <View className="flex-1 bg-gray-600 p-5 rounded-md shadow-lg justify-center">
+            <Text className="text-white text-2xl font-bold text-center">Scheduled</Text>
             <Text className="text-white text-3xl font-bold text-center">13</Text>
           </View>
         </View>
+
+
+
 
         <View className="mt-4">
           <Text className="text-2xl font-bold mb-2">Available Coaches :</Text>
