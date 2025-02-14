@@ -269,7 +269,7 @@ const ProfileScreen = () => {
 
                 <View className="flex flex-col justify-center items-center mt-10 gap-6">
                   {/* Facebook Button */}
-                    <View className="flex-row items-center space-x-2  ml-20 bg-gray-200 p-2 rounded-lg">
+                    <View className="flex-row items-center space-x-2 bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/icons8-facebook-48.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter Facebook link"
@@ -283,7 +283,7 @@ const ProfileScreen = () => {
               
 
                   {/* Instagram Button */}
-                    <View className="flex-row items-center space-x-2 self-start ml-20 bg-gray-200 p-2 rounded-lg">
+                    <View className="flex-row items-center space-x-2 self-start bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/Instergram_Icon.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter Instagram link"
@@ -295,7 +295,7 @@ const ProfileScreen = () => {
                       </View>
 
                   {/* WhatsApp Button */}
-                  <View className="flex-row items-center space-x-2 self-start ml-20   bg-gray-200 p-2 rounded-lg">
+                  <View className="flex-row items-center space-x-2 self-start  bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/Whatsapp_Icon.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter WhatsApp link"
@@ -311,8 +311,8 @@ const ProfileScreen = () => {
             
               
               {/* Cancel Button */}
-              <TouchableOpacity onPress={handleCancel} className="absolute bottom-5 right-5 px-4 py-2 bg-blue-600 rounded-lg">
-                <Text className="text-white text-2xl">Cancel</Text>
+              <TouchableOpacity onPress={handleCancel} className="mt-2 w-24 flex flex-row  py-2 bg-blue-600 rounded-lg">
+                <Text className="text-white text-2xl text-center">Cancel</Text>
               </TouchableOpacity>
             </SafeAreaView>
           </Modal>
