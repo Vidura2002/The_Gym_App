@@ -64,6 +64,14 @@ const TabLayout = () => {
         headerShown: false,
     }}
     />
+    
+    <Tabs.Screen
+    name="admin"
+    options={{
+        tabBarLabel: "admin",
+        headerShown: false,
+    }}
+    />
 
     <Tabs.Screen
         name="info"
@@ -74,6 +82,17 @@ const TabLayout = () => {
                 <Feather name="info" size={24} color="black" />
             )
         }}
+    />
+
+    <Tabs.Screen
+            name="inbox"
+            options={{
+                tabBarLabel:"inbox",
+                headerShown:false,
+                tabBarIcon:({color,size,focused})=> (
+                  <AntDesign name="message1" size={24} color="black" />
+                )
+            }}
     />
 
     </Tabs>
