@@ -64,6 +64,14 @@ const TabLayout = () => {
         headerShown: false,
     }}
     />
+    
+    <Tabs.Screen
+    name="admin"
+    options={{
+        tabBarLabel: "admin",
+        headerShown: false,
+    }}
+    />
 
     <Tabs.Screen
         name="info"
