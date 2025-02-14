@@ -22,6 +22,7 @@ const Info = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const { width } = useWindowDimensions();
+  const [filterMembers,setFilterMembers] = useState(members)
 
   const openModal = (event: any) => {
     event.target.measure((fx: any, fy: any, width: any, height: any, px: any, py: any) => {
@@ -37,6 +38,21 @@ const Info = () => {
       setModalVisible(false);
     }
   };
+
+  const handleViewProfile = () =>{
+    router.push(`/profile`)
+
+  }
+
+  const handleViewInbox = () =>{
+    router.push(`/inbox`)
+
+  }
+
+  const handleSerach = (text:string) =>{
+    const filterMem = members.filter((mem)=>mem.name.includes(text))
+    setFilterMembers(filterMem)
+  }
 
   return (
     <SafeAreaView className="p-2 bg-white">
@@ -56,7 +72,10 @@ const Info = () => {
               value={search}
               placeholder="Search for anything"
               className="text-sm font-rubik text-black-300 ml-2 flex-1 w-full"
-              onChangeText={setSearch}
+              onChangeText={(text) => {
+                setSearch(text);
+                handleSerach(text);
+              }}
             />
           </View>
         </View>
@@ -66,7 +85,7 @@ const Info = () => {
         </View>
 
         <View className="mt-5">
-          {members.map((item, index) => (
+          {filterMembers.map((item, index) => (
             <View key={index} className="flex flex-row items-center justify-between border-b mb-1 p-2 rounded-md">
               <View className="flex flex-row gap-2 items-center">
                 <Image className="size-12 rounded-full" source={require("../../../assets/images/member.jpg")} />
@@ -102,13 +121,13 @@ const Info = () => {
               }}
             >
               {/* Tap outside area to close the modal */}
-              <TouchableOpacity className="flex flex-row items-center gap-1">
+              <TouchableOpacity className="flex flex-row items-center gap-1" onPress={()=>handleViewProfile()}>
                 <FontAwesome5 name="user-alt" size={15} color="black" />
-                <Text className="text-lg font-bold">View Profile</Text>
+                <Text className="text-lg font-medium">View Profile</Text>
               </TouchableOpacity>
-              <TouchableOpacity className="flex flex-row items-center gap-2 mt-2">
+              <TouchableOpacity className="flex flex-row items-center gap-2 mt-2" onPress={()=>handleViewInbox()}>
                 <Foundation name="mail" size={20} color="black" />
-                <Text className="text-lg font-bold">Inbox</Text>
+                <Text className="text-lg font-medium">Inbox</Text>
               </TouchableOpacity>
             </View>
           </TouchableWithoutFeedback>
