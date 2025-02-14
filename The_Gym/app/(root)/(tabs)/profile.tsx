@@ -258,18 +258,18 @@ const ProfileScreen = () => {
                 value={tempName}
                 onChangeText={setTempName}
                 placeholder="Name"
-                className="w-full  bg-gray-200 p-4 rounded-lg mt-12 text-2xl"
+                className="w-full  bg-gray-200 p-4 shadow-md rounded-lg mt-12 text-xl"
               />
               <TextInput
                 value={tempUsername}
                 onChangeText={setTempUsername}
                 placeholder="Username"
-                className="w-full bg-gray-200 p-4 rounded-lg mt-6 text-2xl"
+                className="w-full bg-gray-200 p-4 shadow-md rounded-lg mt-6 text-xl"
               />
 
-                <View className="justify-center items-center mt-20 space-x-4 gap-6">
+                <View className="flex flex-col justify-center items-center mt-10 gap-6">
                   {/* Facebook Button */}
-                    <View className="flex-row items-center space-x-2 self-start ml-20 bg-gray-200 p-4 rounded-lg">
+                    <View className="flex-row items-center space-x-2  ml-20 bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/icons8-facebook-48.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter Facebook link"
@@ -283,7 +283,7 @@ const ProfileScreen = () => {
               
 
                   {/* Instagram Button */}
-                    <View className="flex-row items-center space-x-2 self-start ml-20 bg-gray-200 p-4 rounded-lg">
+                    <View className="flex-row items-center space-x-2 self-start ml-20 bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/Instergram_Icon.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter Instagram link"
@@ -295,7 +295,7 @@ const ProfileScreen = () => {
                       </View>
 
                   {/* WhatsApp Button */}
-                  <View className="flex-row items-center space-x-2 self-start ml-20   bg-gray-200 p-4 rounded-lg">
+                  <View className="flex-row items-center space-x-2 self-start ml-20   bg-gray-200 p-2 rounded-lg">
                     <Image source={require('../../../assets/images/Whatsapp_Icon.png')} className="w-8 h-8" />
                     <TextInput
                         placeholder="Enter WhatsApp link"
