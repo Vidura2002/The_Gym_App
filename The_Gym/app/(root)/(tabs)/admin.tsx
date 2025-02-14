@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ImageBackground } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import for icons
 
 const admin = () => {
   return (
