@@ -6,6 +6,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { FontAwesome } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const ProfileScreen = () => {
   // State to store user profile data and image
@@ -113,6 +114,7 @@ const ProfileScreen = () => {
       }
     };
 
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       {/* Dismiss the menu if user taps outside */}
@@ -175,7 +177,10 @@ const ProfileScreen = () => {
           </View>
 
           {/* Workout Schedule Button */}
-          <TouchableOpacity className="bg-gray-900 w-full px-10 py-7 rounded-lg w-92 h-30 mt-8 flex flex-row justify-between items-center">
+          <TouchableOpacity 
+          className="bg-gray-900 w-full px-10 py-7 rounded-lg w-92 h-30 mt-8 flex flex-row justify-between items-center"
+          onPress={()=>router.push("/(root)/pages/Schedule")}
+          >
             <Text className="text-white text-3xl flex-1 text-center">Workout Schedule</Text>
             <Image
               source={require('../../../assets/images/workoutScheduleIcon.png')}
