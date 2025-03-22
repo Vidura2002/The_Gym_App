@@ -1,12 +1,44 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ImageBackground } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import for icons
+import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Facebook from 'expo-auth-session/providers/facebook'; // Correct import
+import { ResponseType } from 'expo-auth-session';
+import auth from '@react-native-firebase/auth';
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [secureText, setSecureText] = useState(true); // State to toggle password visibility
+  const [secureText, setSecureText] = useState(true);
+
+  // Facebook login configuration
+  const [request, response, promptAsync] = Facebook.useAuthRequest({
+    clientId: 'YOUR_FACEBOOK_APP_ID', // Replace with your Facebook App ID
+    responseType: ResponseType.Token,
+  });
+
+  // Handle Facebook login
+  const FacebookLogin = async () => {
+    try {
+      const result = await promptAsync();
+      
+      if (result.type === 'success') {
+        const { access_token } = result.params;
+        
+        // Create a Firebase credential with the Facebook access token
+        const facebookCredential = auth.FacebookAuthProvider.credential(access_token);
+        
+        // Sign in with Firebase
+        const userCredential = await auth().signInWithCredential(facebookCredential);
+        console.log('User signed in with Facebook!', userCredential.user);
+      } else {
+        console.log('Facebook login canceled');
+      }
+    } catch (error) {
+      console.log('Facebook login failed:', error);
+      Alert.alert('Error', 'Facebook login failed');
+    }
+  };
 
   const handleLogin = () => {
     if (email === '' || password === '') {
@@ -41,7 +73,7 @@ const login = () => {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
-          placeholderTextColor="#fff" // Set placeholder text color here
+          placeholderTextColor="#fff"
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -50,7 +82,7 @@ const login = () => {
             value={password}
             onChangeText={setPassword}
             secureTextEntry={secureText}
-            placeholderTextColor="#fff" // Set placeholder text color here
+            placeholderTextColor="#fff"
           />
           <TouchableOpacity onPress={() => setSecureText(!secureText)}>
             <Icon name={secureText ? 'eye-slash' : 'eye'} size={20} color="#000" />
@@ -62,8 +94,12 @@ const login = () => {
         <View style={styles.socialContainer}>
           <Text style={styles.socialText}>Or Sign Up Using</Text>
           <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.iconButton}>
-              <Icon name="facebook" size={30} color="#3b5998" />
+            <TouchableOpacity 
+              style={styles.iconButton} 
+              onPress={FacebookLogin}
+              disabled={!request}
+            >
+              <Icon name="facebook" size={30} color="#1DA1F2" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
               <Icon name="twitter" size={30} color="#1DA1F2" />
@@ -198,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default login;
+export default Login;
