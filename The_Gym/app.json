@@ -1,23 +1,36 @@
 {
   "expo": {
-    "name": "The_Gym",
-    "slug": "The_Gym",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "thegymapp",
     "facebookAppId": "578533498508035",
-    "facebookDisplayName": "The Gym",
+    "name": "The Gym App",
+    "slug": "the-gym-app",
+    "facebookScheme": "fb578533498508035",
+    "facebookDisplayName": "The Gym App",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.The_Gym"
     },
     "web": {
       "bundler": "metro",
@@ -34,8 +47,7 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-facebook"
+      ]
     ],
     "experiments": {
       "typedRoutes": true

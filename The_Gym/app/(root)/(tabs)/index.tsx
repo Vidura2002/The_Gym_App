@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { SafeAreaView, Text, View ,ScrollView,Image, FlatList, TouchableOpacity} from "react-native";
 import Currentmembers from "@/app/component/Currentmembers";
 import Currentcouches from "@/app/component/Currentcouches";
+import React from "react";
 
 const membersData = [
   { id: '1', name: "Vidura Kahandawa", time: "18.20" },

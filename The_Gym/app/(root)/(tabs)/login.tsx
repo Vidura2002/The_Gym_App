@@ -2,35 +2,39 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import * as Facebook from 'expo-auth-session/providers/facebook'; // Correct import
+import * as Facebook from 'expo-auth-session/providers/facebook';
 import { ResponseType } from 'expo-auth-session';
-import auth from '@react-native-firebase/auth';
+import { makeRedirectUri } from 'expo-auth-session';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureText, setSecureText] = useState(true);
 
+  // Define the redirect URI for Expo Go
+  const redirectUri = makeRedirectUri({
+    scheme: 'thegymapp',
+    useProxy: true, // Use Expo Go's proxy for redirect
+  });
+
+  // Log the redirect URI for debugging
+  console.log('Redirect URI:', redirectUri);
+
   // Facebook login configuration
   const [request, response, promptAsync] = Facebook.useAuthRequest({
-    clientId: 'YOUR_FACEBOOK_APP_ID', // Replace with your Facebook App ID
+    clientId: '578533498508035',
     responseType: ResponseType.Token,
+    redirectUri,
   });
 
   // Handle Facebook login
   const FacebookLogin = async () => {
     try {
-      const result = await promptAsync();
-      
+      const result = await promptAsync({ useProxy: true }); // Use proxy for Expo Go
       if (result.type === 'success') {
         const { access_token } = result.params;
-        
-        // Create a Firebase credential with the Facebook access token
-        const facebookCredential = auth.FacebookAuthProvider.credential(access_token);
-        
-        // Sign in with Firebase
-        const userCredential = await auth().signInWithCredential(facebookCredential);
-        console.log('User signed in with Facebook!', userCredential.user);
+        console.log('Facebook login successful! Access Token:', access_token);
+        Alert.alert('Success', 'Logged in with Facebook');
       } else {
         console.log('Facebook login canceled');
       }
@@ -49,7 +53,7 @@ const Login = () => {
   };
 
   const signIn = () => {
-    router.push('../pages/register');
+    router.push('/pages/register');
   };
 
   return (
@@ -94,8 +98,8 @@ const Login = () => {
         <View style={styles.socialContainer}>
           <Text style={styles.socialText}>Or Sign Up Using</Text>
           <View style={styles.iconRow}>
-            <TouchableOpacity 
-              style={styles.iconButton} 
+            <TouchableOpacity
+              style={styles.iconButton}
               onPress={FacebookLogin}
               disabled={!request}
             >
@@ -125,10 +129,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //transform: [{ translateY: -30 }],
   },
   container: {
-    //backgroundColor: 'rgba(248, 252, 254, 0.5)',
     padding: 20,
     borderRadius: 25,
     width: '90%',
@@ -136,7 +138,6 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   headerContainer: {
-    //backgroundColor: 'rgba(22, 155, 221, 0.5)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -152,7 +153,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50,
-    //marginLeft: 40,
   },
   headerText: {
     fontSize: 40,
@@ -170,8 +170,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Background color to make text visible
-    color: '#fff', // Text color
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    color: '#fff',
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -179,14 +179,14 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.5)',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Same background for the password input
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     paddingHorizontal: 15,
     marginBottom: 15,
   },
   passwordInput: {
     flex: 1,
     height: 50,
-    color: '#fff', // Text color
+    color: '#fff',
   },
   button: {
     backgroundColor: '#4E4FEB',
@@ -201,10 +201,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   socialContainer: {
-    //backgroundColor: 'rgba(22, 155, 221, 0.5)',
     alignItems: 'center',
     marginTop: 40,
-    //transform: [{ translateY: 40 }],
   },
   socialText: {
     color: '#fff',
@@ -219,11 +217,9 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   signupContainer: {
-    //backgroundColor: 'rgba(22, 155, 221, 0.5)',
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 20,
-    //transform: [{ translateY: 40 }],
   },
   signupText: {
     color: '#fff',

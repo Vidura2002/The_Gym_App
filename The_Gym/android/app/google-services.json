@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334918585591",
+    "project_id": "the-gym-836d8",
+    "storage_bucket": "the-gym-836d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334918585591:android:ba106e30c302ed0259d7f2",
+        "android_client_info": {
+          "package_name": "HEK_V.The_Gym"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCupUPJ-W1Es59NsC-f_gbbZ5ixYuzW1_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
