@@ -2,44 +2,45 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import * as Facebook from 'expo-auth-session/providers/facebook'; // Correct import
-import { ResponseType } from 'expo-auth-session';
-import auth from '@react-native-firebase/auth';
+import {auth} from '../../../config/firebaseConfig'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../context/userSlice';
+import { useRouter } from 'expo-router';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureText, setSecureText] = useState(true);
-
+  const dispatch = useDispatch();
+  const router = useRouter();
   // Facebook login configuration
-  const [request, response, promptAsync] = Facebook.useAuthRequest({
-    clientId: 'YOUR_FACEBOOK_APP_ID', // Replace with your Facebook App ID
-    responseType: ResponseType.Token,
-  });
+ 
 
   // Handle Facebook login
-  const FacebookLogin = async () => {
+
+  const loginWithEmail = async () => {
+
+  
     try {
-      const result = await promptAsync();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
       
-      if (result.type === 'success') {
-        const { access_token } = result.params;
-        
-        // Create a Firebase credential with the Facebook access token
-        const facebookCredential = auth.FacebookAuthProvider.credential(access_token);
-        
-        // Sign in with Firebase
-        const userCredential = await auth().signInWithCredential(facebookCredential);
-        console.log('User signed in with Facebook!', userCredential.user);
-      } else {
-        console.log('Facebook login canceled');
-      }
+      // Dispatch user data to Redux store
+      dispatch(setUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || '',
+      }));
+      
+      console.log("User logged in:", user);
+      router.replace("/"); // Navigate to home
+      
     } catch (error) {
-      console.log('Facebook login failed:', error);
-      Alert.alert('Error', 'Facebook login failed');
+      console.error("Error logging in:", error);
+      // Handle error (show alert, etc.)
     }
   };
-
   const handleLogin = () => {
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please fill in all fields');
@@ -88,7 +89,7 @@ const Login = () => {
             <Icon name={secureText ? 'eye-slash' : 'eye'} size={20} color="#000" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button} onPress={loginWithEmail}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <View style={styles.socialContainer}>
@@ -96,8 +97,7 @@ const Login = () => {
           <View style={styles.iconRow}>
             <TouchableOpacity 
               style={styles.iconButton} 
-              onPress={FacebookLogin}
-              disabled={!request}
+              
             >
               <Icon name="facebook" size={30} color="#1DA1F2" />
             </TouchableOpacity>
